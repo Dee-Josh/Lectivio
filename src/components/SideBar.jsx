@@ -4,6 +4,8 @@ import { auth } from "../firebase";
 // import { useAuth } from "../context/AuthContext";
 import { AuthProvider, useAuth } from "../context/AuthContext";
 
+// renamed
+
 const navItems = [
   { label: "Dashboard", path: "/dashboard", icon: "📊" },
   { label: "Courses", path: "/courses", icon: "📚" },

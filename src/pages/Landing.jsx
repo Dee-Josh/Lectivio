@@ -88,7 +88,7 @@ export default function Landing() {
         <div className="landing-hero-visual">
           <div className="landing-hero-card">
             {/* <p className="muted small">Dashboard preview</p> */}
-            <img className="dashboard-img" src="./src/assets/dashboard.png" alt="Dashboard Snapshot" />
+            <img src="./dashboard.png" className="dashboard-img" alt="Dashboard Snapshot" />
           </div>
         </div>
       </section>

@@ -96,3 +96,6 @@ export const db = initializeFirestore(app, {
 });
 
 export const storage = getStorage(app);
+
+
+window.auth = getAuth(app);

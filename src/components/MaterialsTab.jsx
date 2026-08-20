@@ -11,7 +11,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
-import { supabase } from "../supabase";
+import { supabase } from "../superbase";
 import Spinner from "./Spinner";
 
 export default function MaterialsTab({ courseId, lecturerId }) {
@@ -127,7 +127,7 @@ export default function MaterialsTab({ courseId, lecturerId }) {
           <p className="muted small">Upload lecture notes, slides, and handouts (PDF only for now).</p>
         </div>
         <label className="primary-btn upload-btn">
-          + Upload PDF
+          Upload 
           <input
             type="file"
             accept="application/pdf"

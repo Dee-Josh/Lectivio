@@ -1740,6 +1740,7 @@ p.center {
 
 .upload-btn {
   cursor: pointer;
+  text-align: center;
 }
 
 .upload-progress {

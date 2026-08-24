@@ -19,7 +19,11 @@ import {
   ClipboardCheck,
   Settings,
   MessageCircle,
-  LucideMessageSquare
+  LucideMessageSquare,
+  BookOpen,
+  PercentSquare,
+  Bolt
+  
 
 } from "lucide-react";
 
@@ -39,8 +43,9 @@ import {
 
 const navItems = [
   { label: "Dashboard", path: "/dashboard", icon: <Home /> },
-  { label: "Courses", path: "/courses", icon: <BookA /> },
-  { label: "Grade Score", path: "/grades", icon: <ClipboardCheck />, disabled: true },
+  // { label: "Grade Score", path: "/grade-scores", icon: <PercentSquare />, disabled: true },
+  { label: "Grade Scores", path: "/grade-scores", icon: <PercentSquare />, isNew: true },
+  { label: "Courses", path: "/courses", icon: <BookOpen /> },
   { label: "Students", path: "/students", icon: <Users2 />, disabled: true },
   { label: "Attendance", path: "/attendance", icon: <CalendarCheck />, disabled: true },
   // { label: "Assessments", path: "/assessments", icon: <ClipboardCheck />, disabled: true },

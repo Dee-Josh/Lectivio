@@ -9,6 +9,7 @@ import CourseView from "./pages/CourseView";
 import OfflineBanner from "./components/OfflineBanner";
 import ForgotPassword from "./pages/ForgotPassword";
 import Landing from "./pages/Landing";
+import GradeScores from "./pages/GradeScores";
 
 function PrivateRoute({ children }) {
   const { currentUser } = useAuth();
@@ -34,6 +35,14 @@ function AppRoutes() {
         element={
           <PrivateRoute>
             <Dashboard />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/grade-scores"
+        element={
+          <PrivateRoute>
+            <GradeScores />
           </PrivateRoute>
         }
       />

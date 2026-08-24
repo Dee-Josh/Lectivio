@@ -12,20 +12,31 @@ if (!getApps().length) {
   });
 }
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
 serve(async (req) => {
+  // Browser sends this automatically before the real POST — must answer it directly
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+
   try {
     const { uid } = await req.json();
     if (!uid) {
-      return new Response("Missing uid", { status: 400 });
+      return new Response("Missing uid", { status: 400, headers: corsHeaders });
     }
 
     await getAuth().setCustomUserClaims(uid, { role: "authenticated" });
 
     return new Response(JSON.stringify({ success: true }), {
-      headers: { "Content-Type": "application/json" },
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {
     console.error("set-role-claim failed:", err);
-    return new Response("Failed to set role claim", { status: 500 });
+    return new Response("Failed to set role claim", { status: 500, headers: corsHeaders });
   }
 });

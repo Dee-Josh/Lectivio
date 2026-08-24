@@ -26,7 +26,7 @@ export default function Signup() {
       const user = userCredential.user;
 
       // in your signup flow, after createUserWithEmailAndPassword succeeds
-      await fetch("/.netlify/functions/set-role-claim", {
+      await fetch("https://akrevvbdrueqaefxdazh.functions.supabase.co/set-role-claim", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ uid: userCredential.user.uid }),

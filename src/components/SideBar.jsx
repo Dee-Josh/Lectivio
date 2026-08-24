@@ -3,20 +3,52 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 // import { useAuth } from "../context/AuthContext";
 import { AuthProvider, useAuth } from "../context/AuthContext";
+import {
+  Home,
+  LogOutIcon,
+  LayoutDashboard,
+  BookA, 
+  FileCheck2,
+  Calendar,
+  Users,
+  Users2,
+  Calendar1,
+  CalendarCheck,
+  ChartNoAxesCombined,
+  List,
+  ClipboardCheck,
+  Settings,
+  MessageCircle,
+  LucideMessageSquare
 
-// renamed
+} from "lucide-react";
+
+// Former Icons
+
+// const navItems = [
+//   { label: "Dashboard", path: "/dashboard", icon: "📊" },
+//   { label: "Courses", path: "/courses", icon: "📚" },
+//   { label: "Grade Score", path: "/grades", icon: "🎓", disabled: true },
+//   { label: "Students", path: "/students", icon: "👥", disabled: true },
+//   { label: "Attendance", path: "/attendance", icon: "✅", disabled: true },
+//   { label: "Assessments", path: "/assessments", icon: "📝", disabled: true },
+//   { label: "Analytics", path: "/analytics", icon: "📈", disabled: true },
+//   { label: "Messages", path: "/messages", icon: "💬", disabled: true },
+//   { label: "Settings", path: "/settings", icon: "⚙️", disabled: true },
+// ];
 
 const navItems = [
-  { label: "Dashboard", path: "/dashboard", icon: "📊" },
-  { label: "Courses", path: "/courses", icon: "📚" },
-  { label: "Grade Score", path: "/grades", icon: "🎓", disabled: true },
-  { label: "Students", path: "/students", icon: "👥", disabled: true },
-  { label: "Attendance", path: "/attendance", icon: "✅", disabled: true },
-  { label: "Assessments", path: "/assessments", icon: "📝", disabled: true },
-  { label: "Analytics", path: "/analytics", icon: "📈", disabled: true },
-  { label: "Messages", path: "/messages", icon: "💬", disabled: true },
-  { label: "Settings", path: "/settings", icon: "⚙️", disabled: true },
+  { label: "Dashboard", path: "/dashboard", icon: <Home /> },
+  { label: "Courses", path: "/courses", icon: <BookA /> },
+  { label: "Grade Score", path: "/grades", icon: <ClipboardCheck />, disabled: true },
+  { label: "Students", path: "/students", icon: <Users2 />, disabled: true },
+  { label: "Attendance", path: "/attendance", icon: <CalendarCheck />, disabled: true },
+  // { label: "Assessments", path: "/assessments", icon: <ClipboardCheck />, disabled: true },
+  { label: "Analytics", path: "/analytics", icon: <ChartNoAxesCombined />, disabled: true },
+  { label: "Messages", path: "/messages", icon: <LucideMessageSquare />, disabled: true },
+  { label: "Settings", path: "/settings", icon: <Settings />, disabled: true },
 ];
+
 
 export default function Sidebar({ isOpen, onClose }) {
   const { currentUser } = useAuth();
@@ -62,7 +94,7 @@ export default function Sidebar({ isOpen, onClose }) {
             <span className="sidebar-user-email">{currentUser?.email}</span>
           </div>
           <button onClick={() => signOut(auth)} className="sidebar-logout">
-            🚪 Log out
+            <LogOutIcon size={20}/> Log out
           </button>
         </div>
       </aside>

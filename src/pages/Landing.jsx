@@ -1,5 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  ClipboardCheck,
+  SquarePen,
+  FileCheck2,
+  ClipboardList,
+  ChartNoAxesCombined,
+  FileBarChart2,
+  UserRound,
+  SpeechIcon,
+  Sparkles,
+  
+  BookOpen,
+  Clock,
+  BarChart3,
+  Lightbulb,
+  Calendar,
+  CheckCircle2,
+  Users,
+  LineChart,
+  Download,
+  ChevronRight,
+  ChevronLeft,
+  X,
+  Menu
+} from "lucide-react";
 
 export default function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -88,7 +113,7 @@ export default function Landing() {
         <div className="landing-hero-visual">
           <div className="landing-hero-card">
             {/* <p className="muted small">Dashboard preview</p> */}
-            <img src="./dashboard.png" className="dashboard-img" alt="Dashboard Snapshot" />
+            <img src="src\assets\dashboard.png" className="dashboard-img" alt="Dashboard Snapshot" />
           </div>
         </div>
       </section>
@@ -142,28 +167,28 @@ export default function Landing() {
 
           <div className="landing-feature-grid">
             <div className="landing-feature-card">
-              <p className="landing-card-icon">✅</p>
+              <p className="landing-card-icon"><Calendar size={25} color="#fff" /></p>
               <h4>Smart Attendance</h4>
               <p>Take attendance in seconds with real-time tracking.</p>
             </div>
             <div className="landing-feature-card">
-              <p className="landing-card-icon">✅</p>
+              <p className="landing-card-icon"><FileCheck2 size={25} color="#fff" /></p>
               <h4>Result Computation</h4>
               <p>Fast score calculation and grading, done for you.</p>
             </div>
             <div className="landing-feature-card">
-              <p className="landing-card-icon">✅</p>
+              <p className="landing-card-icon"><Users size={25} color="#fff" /></p>
               <h4>Student Management</h4>
               <p>Organize student records and profiles in one place.</p>
             </div>
             <div className="landing-feature-card">
-              <p className="landing-card-icon">✅</p>
+              <p className="landing-card-icon"><ClipboardList size={25} color="#fff" /></p>
               <h4>Insights</h4>
               <p>Track attendance and performance trends at a glance.</p>
             </div>
             <div className="landing-feature-card soon">
               <div className="landing-feature-card-header">
-                <p className="landing-card-icon">✅</p>
+                <p className="landing-card-icon"><ClipboardCheck size={25} color="#fff" /></p>
                 <span className="coming-soon-badge">Coming soon</span>
               </div>
                 <h4>Assessment Management</h4>
@@ -171,7 +196,7 @@ export default function Landing() {
             </div>
             <div className="landing-feature-card soon">
               <div className="landing-feature-card-header">
-                <p className="landing-card-icon">✅</p>
+                <p className="landing-card-icon"><ChartNoAxesCombined size={25} color="#fff" /></p>
                 <span className="coming-soon-badge">Coming soon</span>
               </div>
                 <h4>Analytics & Reports</h4>
@@ -179,7 +204,7 @@ export default function Landing() {
             </div>
             <div className="landing-feature-card soon">
               <div className="landing-feature-card-header">
-                <p className="landing-card-icon">✅</p>
+                <p className="landing-card-icon"><SpeechIcon size={25} color="#fff" /></p>
                 <span className="coming-soon-badge">Coming soon</span>
               </div>
                 <h4>Course Communication</h4>
@@ -187,7 +212,7 @@ export default function Landing() {
             </div>
             <div className="landing-feature-card soon">
               <div className="landing-feature-card-header">
-                <p className="landing-card-icon">✅</p>
+                <p className="landing-card-icon"><Sparkles size={25} color="#fff" /></p>
                 <span className="coming-soon-badge">Coming soon</span>
               </div>
                 <h4>AI Teaching Assistant</h4>
@@ -208,18 +233,18 @@ export default function Landing() {
             </p>
             <div className="landing-platform-badges">
                 <div className="landing-platform-badge">
-                    <span>🌐</span> Web App <small>Access in browser</small>
+                    <span><img src="src\assets\web.png" alt="" /></span> Web App <small>Access in browser</small>
                 </div>
                 <div className="landing-platform-badge soon">
-                    <span>📱</span> Google Play <small>Coming soon</small>
+                    <span><img src="src\assets\playstore.png" alt="" /></span> Google Play <small>Coming soon</small>
                 </div>
                 <div className="landing-platform-badge soon">
-                    <span>🍎</span> App Store <small>Coming soon</small>
+                    <span><img src="src\assets\apple.png" alt="" /></span> App Store <small>Coming soon</small>
                 </div>
             </div>
         </div>
         <div className="landing-platform-image">
-            <img src="./src/assets/devices.png" alt="Lectivio across different devices" />
+            <img src="src\assets\devices.png" alt="Lectivio across different devices" />
         </div>
       </section>
 

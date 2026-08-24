@@ -22,8 +22,8 @@ export default function OfflineBanner() {
   if (isOnline) return null;
 
   function displayOfflineBanner() {
-    if (currentScreen() == '/Landing' || currentScreen() == '/login'|| currentScreen() == '/signup') {
-      console.log(currentScreen() == '/Landing' || currentScreen() == '/login'|| currentScreen() == '/signup')
+    if (currentScreen() == '/' ||currentScreen() == '/landing' || currentScreen() == '/login'|| currentScreen() == '/signup') {
+      console.log(currentScreen() == '/landing' || currentScreen() == '/login'|| currentScreen() == '/signup')
       return true;
     }
   }

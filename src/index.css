@@ -1120,7 +1120,10 @@ p.center {
 
 .landing-card-icon{
   margin-bottom: 20px;
-  font-size: 30px !important;
+  background-color: #4f46e5;
+  display: inline-block;
+  padding: 5px;
+  border-radius: 5px;
   font-weight: bold !important;
 }
 
@@ -1233,6 +1236,16 @@ p.center {
   font-weight: 600;
   font-size: 0.7rem;
   min-width: 100px;
+}
+
+.landing-platform-badge img{
+  width: 50px;
+}
+
+@media (max-width: 600px) {
+  .landing-platform-badge img{
+  width: 30px;
+}
 }
 
 
@@ -1736,6 +1749,9 @@ p.center {
   font-size: 0.9rem;
   font-weight: 600;
   background: none;
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
 .sidebar-logout:hover {

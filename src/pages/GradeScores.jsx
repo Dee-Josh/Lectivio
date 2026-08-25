@@ -39,7 +39,7 @@ export default function GradeScores() {
   const successPct = totalValid > 0 ? ((successCount / totalValid) * 100).toFixed(1) : "0.0";
   const failPct = totalValid > 0 ? ((failCount / totalValid) * 100).toFixed(1) : "0.0";
 
-//   COPY WITH NUMBER
+//   COPY WITH HEADER
 //   function handleCopy() {
 //     const header = hasCAExam ? "No\tCA\tExam\tTotal\tGrade" : "No\tScore\tGrade";
 //     const rows = results.map((r, i) =>
@@ -55,16 +55,16 @@ export default function GradeScores() {
 //     });
 //   }
 
-//  COPY WITHOUT NUMBER
+//  COPY WITHOUT HEADER
 function handleCopy() {
-    const header = hasCAExam ? "CA\tExam\tTotal\tGrade" : "No\tScore\tGrade";
+    const header = hasCAExam ? "CA\tExam\tTotal\tGrade" : "Score\tGrade";
     const rows = results.map((r, i) =>
       hasCAExam
         ? `${r.ca ?? ""}\t${r.exam ?? ""}\t${r.total ?? ""}\t${r.grade}`
         : `${r.total ?? ""}\t${r.grade}`
     );
     // const text = [header, ...rows].join("\n"); // copy with header
-    const text = [header, ...rows].join("\n"); // copy without header
+    const text = [...rows].join("\n"); // copy without header
 
     navigator.clipboard.writeText(text).then(() => {
       setCopyLabel("Copied!");

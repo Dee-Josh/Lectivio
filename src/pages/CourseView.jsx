@@ -8,6 +8,7 @@ import StudentsTab from "../components/StudentsTab";
 // import { updateDoc, deleteDoc } from "firebase/firestore";
 import Spinner from "../components/Spinner";
 import MaterialsTab from "../components/MaterialsTab";
+import OverviewTab from "../components/OverviewTab";
 
 export default function CourseView() {
   const { courseId } = useParams();
@@ -16,7 +17,7 @@ export default function CourseView() {
 
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("students");
+  const [activeTab, setActiveTab] = useState("overview");
   const [showEditCourse, setShowEditCourse] = useState(false);
   const [editName, setEditName] = useState("");
   const [editCode, setEditCode] = useState("");
@@ -134,7 +135,9 @@ export default function CourseView() {
       </div>
 
       <div className="tab-content">
-        {activeTab === "overview" && <p>Overview coming soon.</p>}
+        {activeTab === "overview" && (
+          <OverviewTab onNavigate={setActiveTab} course={course} courseId={courseId} lecturerId={currentUser.uid} />
+        )}
         {activeTab === "materials" && (
           <MaterialsTab courseId={courseId} lecturerId={currentUser.uid} />
         )}

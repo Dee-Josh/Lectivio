@@ -2025,3 +2025,163 @@ p.center {
 .grade-summary-percentages strong {
   color: #1a1a2e;
 }
+
+
+/* OVERVIEW TAB */
+
+.overview-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 700px) {
+  .overview-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.overview-stat-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+
+.overview-stat-card.soon {
+  background: #f9fafb;
+  opacity: 0.75;
+}
+
+.stat-link {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #4f46e5;
+}
+
+.stat-sub {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.overview-panel {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.overview-panel h3 {
+  font-size: 1rem;
+  margin-bottom: 14px;
+}
+
+.overview-panel-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.next-lecture-topic {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.next-lecture-form label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 10px 0 4px;
+}
+
+.next-lecture-form input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.outline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.outline-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #f3f4f6;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.outline-progress-fill {
+  height: 100%;
+  background: #16a34a;
+  transition: width 0.2s ease;
+}
+
+.outline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.outline-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.outline-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.outline-done {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.small-link {
+  font-size: 0.8rem;
+  padding: 2px 6px;
+}
+
+.outline-add-form {
+  display: flex;
+  gap: 8px;
+}
+
+.outline-add-form input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}

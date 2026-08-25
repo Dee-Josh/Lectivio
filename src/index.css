@@ -1983,3 +1983,45 @@ p.center {
   letter-spacing: 0.03em;
 }
 
+/* after adding percentage and ca, exam and total */
+
+.grade-summary {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.grade-summary h4 {
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  color: #374151;
+}
+
+.grade-summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-bottom: 12px;
+}
+
+.grade-summary-item {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.grade-summary-item.total {
+  color: #1a1a2e;
+}
+
+.grade-summary-percentages {
+  display: flex;
+  gap: 24px;
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+.grade-summary-percentages strong {
+  color: #1a1a2e;
+}

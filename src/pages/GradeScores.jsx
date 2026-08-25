@@ -12,7 +12,7 @@ export default function GradeScores() {
     const parsed = parseScores(rawInput);
     const graded = parsed.map((row) => ({
       ...row,
-      grade: row.valid ? getGrade(row.score, scaleName) : "Invalid",
+      grade: row.valid ? getGrade(row.total, scaleName) : "Invalid",
     }));
     setResults(graded);
     setRawInput("");
@@ -23,13 +23,48 @@ export default function GradeScores() {
     setResults([]);
   }
 
-  function handleCopy() {
-    const hasNames = results.some((r) => r.name);
-    const header = hasNames ? "Name\tScore\tGrade" : "Score\tGrade";
-    const rows = results.map((r) =>
-      hasNames ? `${r.name || ""}\t${r.score ?? ""}\t${r.grade}` : `${r.score ?? ""}\t${r.grade}`
+  const hasCAExam = results.some((r) => r.ca !== null);
+  const validResults = results.filter((r) => r.valid);
+  const totalValid = validResults.length;
+
+  const scaleGrades = gradingScales[scaleName].map((band) => band.grade);
+  const gradeCounts = scaleGrades.reduce((acc, g) => {
+    acc[g] = validResults.filter((r) => r.grade === g).length;
+    return acc;
+  }, {});
+
+  const failGrade = scaleGrades[scaleGrades.length - 1]; // lowest tier, e.g. "F"
+  const failCount = gradeCounts[failGrade] || 0;
+  const successCount = totalValid - failCount;
+  const successPct = totalValid > 0 ? ((successCount / totalValid) * 100).toFixed(1) : "0.0";
+  const failPct = totalValid > 0 ? ((failCount / totalValid) * 100).toFixed(1) : "0.0";
+
+//   COPY WITH NUMBER
+//   function handleCopy() {
+//     const header = hasCAExam ? "No\tCA\tExam\tTotal\tGrade" : "No\tScore\tGrade";
+//     const rows = results.map((r, i) =>
+//       hasCAExam
+//         ? `${i + 1}\t${r.ca ?? ""}\t${r.exam ?? ""}\t${r.total ?? ""}\t${r.grade}`
+//         : `${i + 1}\t${r.total ?? ""}\t${r.grade}`
+//     );
+//     const text = [header, ...rows].join("\n");
+
+//     navigator.clipboard.writeText(text).then(() => {
+//       setCopyLabel("Copied!");
+//       setTimeout(() => setCopyLabel("Copy to clipboard"), 1500);
+//     });
+//   }
+
+//  COPY WITHOUT NUMBER
+function handleCopy() {
+    const header = hasCAExam ? "CA\tExam\tTotal\tGrade" : "No\tScore\tGrade";
+    const rows = results.map((r, i) =>
+      hasCAExam
+        ? `${r.ca ?? ""}\t${r.exam ?? ""}\t${r.total ?? ""}\t${r.grade}`
+        : `${r.total ?? ""}\t${r.grade}`
     );
-    const text = [header, ...rows].join("\n");
+    // const text = [header, ...rows].join("\n"); // copy with header
+    const text = [header, ...rows].join("\n"); // copy without header
 
     navigator.clipboard.writeText(text).then(() => {
       setCopyLabel("Copied!");
@@ -38,12 +73,11 @@ export default function GradeScores() {
   }
 
   function handleDownloadCSV() {
-    const hasNames = results.some((r) => r.name);
-    const header = hasNames ? "No,Name,Score,Grade" : "No,Score,Grade";
+    const header = hasCAExam ? "No,CA,Exam,Total,Grade" : "No,Score,Grade";
     const rows = results.map((r, i) =>
-      hasNames
-        ? `${i + 1},"${r.name || ""}",${r.score ?? ""},${r.grade}`
-        : `${i + 1},${r.score ?? ""},${r.grade}`
+      hasCAExam
+        ? `${i + 1},${r.ca ?? ""},${r.exam ?? ""},${r.total ?? ""},${r.grade}`
+        : `${i + 1},${r.total ?? ""},${r.grade}`
     );
     const csvContent = [header, ...rows].join("\n");
 
@@ -57,8 +91,6 @@ export default function GradeScores() {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   }
-
-  const hasNames = results.some((r) => r.name);
 
   return (
     <AppLayout>
@@ -89,21 +121,22 @@ export default function GradeScores() {
           </label>
           <textarea
             className="grade-scores-textarea"
-            placeholder={"72\n65\n48\n83\n\nor with names:\nTunde, 72\nAda, 65"}
+            placeholder={"72\n65\n48\n83\n\nor CA + Exam:\n20 45\n18 50\n25 40"}
             value={rawInput}
             onChange={(e) => setRawInput(e.target.value)}
             rows={10}
           />
           <p className="muted small">
-            One score per line. Optionally include a name (e.g. "Tunde, 72").
+            One entry per line. Use a single number for a total score, or two
+            numbers (CA, Exam) separated by a space, tab, or comma.
           </p>
 
           <div className="grade-scores-actions">
             <button className="secondary-btn" onClick={handleClear}>
               Clear
             </button>
-            <a href="#graded">
-                <button
+            <a href="#grade">
+                <button id="grade"
                 className="primary-btn"
                 onClick={handleGrade}
                 disabled={!rawInput.trim()}
@@ -114,7 +147,7 @@ export default function GradeScores() {
           </div>
         </div>
 
-        <div className="grade-scores-panel" id="graded">
+        <div className="grade-scores-panel">
           <div className="grade-results-header">
             <h3>Graded Results {results.length > 0 && `(${results.length})`}</h3>
           </div>
@@ -127,8 +160,15 @@ export default function GradeScores() {
                 <thead>
                   <tr>
                     <th>#</th>
-                    {hasNames && <th>Name</th>}
-                    <th>Score</th>
+                    {hasCAExam ? (
+                      <>
+                        <th>CA</th>
+                        <th>Exam</th>
+                        <th>Total</th>
+                      </>
+                    ) : (
+                      <th>Score</th>
+                    )}
                     <th>Grade</th>
                   </tr>
                 </thead>
@@ -136,8 +176,15 @@ export default function GradeScores() {
                   {results.map((r, i) => (
                     <tr key={r.id}>
                       <td>{i + 1}</td>
-                      {hasNames && <td>{r.name || "-"}</td>}
-                      <td>{r.score ?? "-"}</td>
+                      {hasCAExam ? (
+                        <>
+                          <td>{r.ca ?? "-"}</td>
+                          <td>{r.exam ?? "-"}</td>
+                          <td>{r.total ?? "-"}</td>
+                        </>
+                      ) : (
+                        <td>{r.total ?? "-"}</td>
+                      )}
                       <td>
                         <span className={`grade-badge grade-${r.grade}`}>
                           {r.grade}
@@ -147,6 +194,28 @@ export default function GradeScores() {
                   ))}
                 </tbody>
               </table>
+
+              <div className="grade-summary">
+                <h4>Summary</h4>
+                <div className="grade-summary-row">
+                  {scaleGrades.map((g) => (
+                    <span key={g} className="grade-summary-item">
+                      {g} = {gradeCounts[g] || 0}
+                    </span>
+                  ))}
+                  <span className="grade-summary-item total">
+                    Total = {totalValid}
+                  </span>
+                </div>
+                <div className="grade-summary-percentages">
+                  <p>
+                    <strong>Percentage of Success:</strong> {successPct}%
+                  </p>
+                  <p>
+                    <strong>Percentage of Failure:</strong> {failPct}%
+                  </p>
+                </div>
+              </div>
 
               <div className="grade-export-actions">
                 <button className="secondary-btn" onClick={handleCopy}>

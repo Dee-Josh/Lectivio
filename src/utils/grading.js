@@ -23,8 +23,9 @@ export function getGrade(score, scaleName) {
   return found ? found.grade : "-";
 }
 
-// Parses pasted text into { name, score } rows.
-// Supports: "72", "72, Tunde", "Tunde, 72", "Tunde - 72"
+// Parses each line into either:
+//  - a single total score ("72")
+//  - CA + Exam ("20 45", "20\t45", "20, 45") -> total = CA + Exam
 export function parseScores(text) {
   const lines = text
     .split("\n")
@@ -32,24 +33,26 @@ export function parseScores(text) {
     .filter(Boolean);
 
   return lines.map((line, i) => {
-    const parts = line.split(/,|-/).map((p) => p.trim()).filter(Boolean);
+    const nums = (line.match(/\d+(\.\d+)?/g) || []).map(Number);
 
-    let score = null;
-    let name = "";
+    let ca = null;
+    let exam = null;
+    let total = null;
 
-    for (const part of parts) {
-      if (/^\d+(\.\d+)?$/.test(part) && score === null) {
-        score = parseFloat(part);
-      } else {
-        name = name ? `${name} ${part}` : part;
-      }
+    if (nums.length >= 2) {
+      ca = nums[0];
+      exam = nums[1];
+      total = ca + exam;
+    } else if (nums.length === 1) {
+      total = nums[0];
     }
 
     return {
       id: i,
-      name: name || null,
-      score: score !== null ? score : null,
-      valid: score !== null && score >= 0 && score <= 100,
+      ca,
+      exam,
+      total,
+      valid: total !== null && total >= 0 && total <= 100,
     };
   });
 }

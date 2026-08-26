@@ -25,6 +25,11 @@ import {
   X,
   Menu
 } from "lucide-react";
+import dashboardImage from "../assets/dashboard.png";
+import devicesImage from "../assets/devices.png";
+import appleImage from "../assets/apple.png";
+import webImage from "../assets/web.png";
+import playstoreImage from "../assets/playstore.png";
 
 export default function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -113,7 +118,7 @@ export default function Landing() {
         <div className="landing-hero-visual">
           <div className="landing-hero-card">
             {/* <p className="muted small">Dashboard preview</p> */}
-            <img src="../assets/dashboard.png" className="dashboard-img" alt="Dashboard Snapshot" />
+            <img src={dashboardImage} className="dashboard-img" alt="Dashboard Snapshot" />
           </div>
         </div>
       </section>
@@ -233,18 +238,18 @@ export default function Landing() {
             </p>
             <div className="landing-platform-badges">
                 <div className="landing-platform-badge">
-                    <span><img src="../assets/web.png" alt="" /></span> Web App <small>Access in browser</small>
+                    <span><img src={webImage} alt="" /></span> Web App <small>Access in browser</small>
                 </div>
                 <div className="landing-platform-badge soon">
-                    <span><img src="../assets/playstore.png" alt="" /></span> Google Play <small>Coming soon</small>
+                    <span><img src={playstoreImage} alt="" /></span> Google Play <small>Coming soon</small>
                 </div>
                 <div className="landing-platform-badge soon">
-                    <span><img src="../assets/apple.png" alt="" /></span> App Store <small>Coming soon</small>
+                    <span><img src={appleImage} alt="" /></span> App Store <small>Coming soon</small>
                 </div>
             </div>
         </div>
         <div className="landing-platform-image">
-            <img src="../assets/devices.png" alt="Lectivio across different devices" />
+            <img src={devicesImage} alt="Lectivio across different devices" />
         </div>
       </section>
 

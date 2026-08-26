@@ -6,6 +6,7 @@ import { auth, db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
 import AppLayout from "../components/AppLayout";
 import Spinner from "../components/Spinner";
+import { getNextLectureDate, formatLectureDate } from "../utils/schedule";
 
 export default function Dashboard() {
   const { currentUser } = useAuth();
@@ -48,6 +49,20 @@ export default function Dashboard() {
   // );
   const totalStudents = courses.reduce((sum, c) => sum + (c.studentCount || 0), 0);
   const recentCourses = courses.slice(0, 3);
+  const upcomingLectures = courses
+  .map((course) => {
+    const nextDate = getNextLectureDate(course.weeklySchedule);
+    if (!nextDate) return null;
+    return {
+      courseId: course.id,
+      courseName: course.courseName,
+      courseCode: course.courseCode,
+      date: nextDate,
+    };
+  })
+  .filter(Boolean)
+  .sort((a, b) => a.date - b.date)
+  .slice(0, 3);
 
   return (
     <AppLayout>
@@ -136,9 +151,32 @@ export default function Dashboard() {
               </Link>
             </div>
 
-            <div className="dashboard-panel">
+            {/* <div className="dashboard-panel">
               <h3>Class Performance Overview</h3>
               <p className="muted">Coming soon — once Attendance and Assessments are live.</p>
+            </div> */}
+
+            <div className="dashboard-panel">
+              <h3>Upcoming Lectures</h3>
+              {upcomingLectures.length === 0 ? (
+                <p className="muted">No lectures scheduled yet. Set a weekly schedule from any course's Overview tab.</p>
+              ) : (
+                <div className="upcoming-lecture-list">
+                  {upcomingLectures.map((lec) => (
+                    <Link
+                      to={`/courses/${lec.courseId}`}
+                      className="upcoming-lecture-row"
+                      key={lec.courseId + lec.date}
+                    >
+                      <div>
+                        <p className="upcoming-lecture-course">{lec.courseName}</p>
+                        <p className="muted small">{lec.courseCode}</p>
+                      </div>
+                      <p className="upcoming-lecture-time">{formatLectureDate(lec.date)}</p>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </>

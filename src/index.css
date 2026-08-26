@@ -2270,3 +2270,44 @@ p.center {
   border-radius: 6px;
   font-size: 0.85rem;
 }
+
+
+/* DISPLAYING RECENT COURSES IN DASHBOARD */
+/* INSTEAD OF CLASS OVERVIEW */
+
+.upcoming-lecture-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.upcoming-lecture-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 8px;
+  border-bottom: 1px solid #f3f4f6;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.upcoming-lecture-row:hover {
+  background: #f9fafb;
+}
+
+.upcoming-lecture-row:last-child {
+  border-bottom: none;
+}
+
+.upcoming-lecture-course {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.upcoming-lecture-time {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4f46e5;
+}

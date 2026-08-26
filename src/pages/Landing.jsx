@@ -113,7 +113,7 @@ export default function Landing() {
         <div className="landing-hero-visual">
           <div className="landing-hero-card">
             {/* <p className="muted small">Dashboard preview</p> */}
-            <img src="src\assets\dashboard.png" className="dashboard-img" alt="Dashboard Snapshot" />
+            <img src="../assets/dashboard.png" className="dashboard-img" alt="Dashboard Snapshot" />
           </div>
         </div>
       </section>
@@ -233,18 +233,18 @@ export default function Landing() {
             </p>
             <div className="landing-platform-badges">
                 <div className="landing-platform-badge">
-                    <span><img src="src\assets\web.png" alt="" /></span> Web App <small>Access in browser</small>
+                    <span><img src="../assets/web.png" alt="" /></span> Web App <small>Access in browser</small>
                 </div>
                 <div className="landing-platform-badge soon">
-                    <span><img src="src\assets\playstore.png" alt="" /></span> Google Play <small>Coming soon</small>
+                    <span><img src="../assets/playstore.png" alt="" /></span> Google Play <small>Coming soon</small>
                 </div>
                 <div className="landing-platform-badge soon">
-                    <span><img src="src\assets\apple.png" alt="" /></span> App Store <small>Coming soon</small>
+                    <span><img src="../assets/apple.png" alt="" /></span> App Store <small>Coming soon</small>
                 </div>
             </div>
         </div>
         <div className="landing-platform-image">
-            <img src="src\assets\devices.png" alt="Lectivio across different devices" />
+            <img src="../assets/devices.png" alt="Lectivio across different devices" />
         </div>
       </section>
 

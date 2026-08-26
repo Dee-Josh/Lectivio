@@ -232,6 +232,7 @@ input {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   width: 100%;
   max-width: 400px;
+  position: relative;
 }
 
 
@@ -2310,4 +2311,12 @@ p.center {
   font-size: 0.85rem;
   font-weight: 600;
   color: #4f46e5;
+}
+
+
+
+/* AUTH BACK FOR SIGN UP AND LOGIN */
+
+.auth-back {
+  font-size: 12px;
 }

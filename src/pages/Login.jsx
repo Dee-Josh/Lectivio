@@ -43,6 +43,7 @@ export default function Login() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+      <Link to="/landing" className="back-link auth-back">← Back</Link>
         <h1>Lectivio</h1>
         <h2>Welcome back 👋</h2>
         <p>Sign in to your account</p>

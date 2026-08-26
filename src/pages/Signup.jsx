@@ -51,6 +51,7 @@ export default function Signup() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+        <Link to="/landing" className="back-link auth-back">← Back</Link>
         <h1>Lectivio</h1>
         <h2>Create your account</h2>
         <p>Let's get you started</p>

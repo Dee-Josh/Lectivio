@@ -13,19 +13,17 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Spinner from "./Spinner";
+import { getNextLectureDate, formatLectureDate, lectureDateKey, WEEKDAYS } from "../utils/schedule";
 
 export default function OverviewTab({ onNavigate, course, courseId, lecturerId }) {
-    const [studentCount, setStudentCount] = useState(course.studentCount || 0);
-    const [materialCount, setMaterialCount] = useState(0);
-    
-    const [navToStudent, setNavToStudent] = useState(false);
+  const [studentCount, setStudentCount] = useState(course.studentCount || 0);
+  const [materialCount, setMaterialCount] = useState(0);
     
   // Next Lecture state
-  const [editingLecture, setEditingLecture] = useState(false);
-  const [lectureTopic, setLectureTopic] = useState(course.nextLecture?.topic || "");
-  const [lectureDate, setLectureDate] = useState(course.nextLecture?.date || "");
-  const [lectureTime, setLectureTime] = useState(course.nextLecture?.time || "");
-  const [lectureLocation, setLectureLocation] = useState(course.nextLecture?.location || "");
+  const [editingSchedule, setEditingSchedule] = useState(false);
+  const [slots, setSlots] = useState(course.weeklySchedule?.slots || []);
+  const [scheduleLocation, setScheduleLocation] = useState(course.weeklySchedule?.location || "");
+  const [topicOverrideInput, setTopicOverrideInput] = useState("");
 
   // Outline state
   const [topics, setTopics] = useState([]);
@@ -54,28 +52,54 @@ export default function OverviewTab({ onNavigate, course, courseId, lecturerId }
     return unsub;
   }, [courseId]);
 
-  function saveNextLecture(e) {
-    e.preventDefault();
-    updateDoc(courseRef, {
-      nextLecture: {
-        topic: lectureTopic,
-        date: lectureDate,
-        time: lectureTime,
-        location: lectureLocation,
-      },
-    }).catch((err) => console.error("Failed to save next lecture:", err));
-    setEditingLecture(false);
+  function toggleDay(day) {
+    setSlots((prev) => {
+      const exists = prev.find((s) => s.day === day);
+      if (exists) {
+        return prev.filter((s) => s.day !== day);
+      }
+      return [...prev, { day, time: "" }];
+    });
   }
 
-  function clearNextLecture() {
-    updateDoc(courseRef, { nextLecture: null }).catch((err) =>
-      console.error("Failed to clear next lecture:", err)
+  function updateSlotTime(day, time) {
+    setSlots((prev) => prev.map((s) => (s.day === day ? { ...s, time } : s)));
+  }
+
+  function saveSchedule(e) {
+    e.preventDefault();
+    const validSlots = slots.filter((s) => s.time);
+    if (validSlots.length === 0) return;
+    updateDoc(courseRef, {
+      weeklySchedule: { slots: validSlots, location: scheduleLocation },
+    }).catch((err) => console.error("Failed to save schedule:", err));
+    setEditingSchedule(false);
+  }
+
+  function clearSchedule() {
+    updateDoc(courseRef, { weeklySchedule: null }).catch((err) =>
+      console.error("Failed to clear schedule:", err)
     );
-    setLectureTopic("");
-    setLectureDate("");
-    setLectureTime("");
-    setLectureLocation("");
-    setEditingLecture(false);
+    setSlots([]);
+    setScheduleLocation("");
+    setEditingSchedule(false);
+    setTopicOverrideInput("")
+  }  
+
+  const weeklySchedule = course.weeklySchedule;
+  const nextLectureDate = getNextLectureDate(weeklySchedule);
+  const dateKey = lectureDateKey(nextLectureDate);
+  const savedOverride = course.topicOverrides?.[dateKey];
+  const nextUncheckedTopic = topics.find((t) => !t.completed);
+  const displayTopic = savedOverride || nextUncheckedTopic?.title || "No topic set";
+
+  function handleOverrideSubmit(e) {
+    e.preventDefault();
+    if (!topicOverrideInput.trim() || !dateKey) return;
+    updateDoc(courseRef, {
+      [`topicOverrides.${dateKey}`]: topicOverrideInput.trim(),
+    }).catch((err) => console.error("Failed to save topic override:", err));
+    setTopicOverrideInput("");
   }
 
   function addTopic(e) {
@@ -136,67 +160,104 @@ export default function OverviewTab({ onNavigate, course, courseId, lecturerId }
       <div className="overview-grid">
         {/* Next Lecture */}
         <div className="overview-panel">
-          <h3>Next Lecture</h3>
+          <h3>Weekly Lecture Schedule</h3>
 
-          {editingLecture ? (
-            <form onSubmit={saveNextLecture} className="next-lecture-form">
-              <label>Topic</label>
+          {editingSchedule ? (
+            <form onSubmit={saveSchedule} className="next-lecture-form">
+              <label>Which days does this class hold, and at what time?</label>
+              <div className="day-time-list">
+                {WEEKDAYS.map((day) => {
+                  const slot = slots.find((s) => s.day === day);
+                  return (
+                    <div className="day-time-row" key={day}>
+                      <button
+                        type="button"
+                        className={`day-chip ${slot ? "selected" : ""}`}
+                        onClick={() => toggleDay(day)}
+                      >
+                        {day.slice(0, 3)}
+                      </button>
+                      {slot && (
+                        <input
+                          type="time"
+                          value={slot.time}
+                          onChange={(e) => updateSlotTime(day, e.target.value)}
+                          className="day-time-input"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              <label>Location (optional, applies to all days)</label>
               <input
-                value={lectureTopic}
-                onChange={(e) => setLectureTopic(e.target.value)}
-                placeholder="e.g. Bernoulli's Equation"
-                required
-              />
-              <label>Date</label>
-              <input
-                type="date"
-                value={lectureDate}
-                onChange={(e) => setLectureDate(e.target.value)}
-                required
-              />
-              <label>Time</label>
-              <input
-                type="time"
-                value={lectureTime}
-                onChange={(e) => setLectureTime(e.target.value)}
-                required
-              />
-              <label>Location (optional)</label>
-              <input
-                value={lectureLocation}
-                onChange={(e) => setLectureLocation(e.target.value)}
+                value={scheduleLocation}
+                onChange={(e) => setScheduleLocation(e.target.value)}
                 placeholder="e.g. LT 2"
               />
+
               <div className="form-actions">
-                <button type="button" onClick={() => setEditingLecture(false)}>
+                <button type="button" onClick={() => setEditingSchedule(false)}>
                   Cancel
                 </button>
-                <button type="submit" className="primary-btn">
-                  Save
+                <button
+                  type="submit"
+                  className="primary-btn"
+                  disabled={slots.filter((s) => s.time).length === 0}
+                >
+                  Save Schedule
                 </button>
               </div>
             </form>
-          ) : nextLecture ? (
+          ) : weeklySchedule ? (
             <>
-              <p className="next-lecture-topic">{nextLecture.topic}</p>
-              <p className="muted small">
-                {nextLecture.date} · {nextLecture.time}
-                {nextLecture.location && ` · ${nextLecture.location}`}
-              </p>
+              <div className="weekly-days-row">
+                {weeklySchedule.slots.map((s) => (
+                  <span key={s.day} className="day-badge">
+                    {s.day.slice(0, 3)} by {s.time}
+                  </span>
+                ))}
+                {weeklySchedule.location && (
+                  <span className="muted small">· {weeklySchedule.location}</span>
+                )}
+              </div>
+
+              {nextLectureDate && (
+                <div className="next-lecture-highlight">
+                  <p className="muted small">Next Lecture</p>
+                  <p className="next-lecture-topic">{displayTopic}</p>
+                  <strong><p className="muted small">{formatLectureDate(nextLectureDate)}</p></strong>
+
+                  <form onSubmit={handleOverrideSubmit}>
+                    <input
+                      className="topic-override-input"
+                      placeholder="Override topic for this lecture, then press Enter"
+                      value={topicOverrideInput}
+                      onChange={(e) => setTopicOverrideInput(e.target.value)}
+                    />
+                  </form>
+                </div>
+              )}
+
               <div className="overview-panel-actions">
-                <button className="secondary-btn" onClick={() => setEditingLecture(true)}>
-                  Edit
+                <button className="secondary-btn" onClick={() => setEditingSchedule(true)}>
+                  Edit Schedule
                 </button>
-                <button className="link-btn danger" onClick={clearNextLecture}>
+                <button className="link-btn danger" onClick={clearSchedule}>
                   Clear
                 </button>
               </div>
+
+              <p className="muted small reminder-note">
+                🔔 Reminders/notifications coming soon.
+              </p>
             </>
           ) : (
             <>
-              <p className="muted">No lecture scheduled yet.</p>
-              <button className="primary-btn" onClick={() => setEditingLecture(true)}>
-                Schedule Next Lecture
+              <p className="muted" style={{marginBottom: '10px'}}>No weekly schedule set yet.</p>
+              <button className="primary-btn" onClick={() => setEditingSchedule(true)}>
+                Set Weekly Schedule
               </button>
             </>
           )}
@@ -205,7 +266,7 @@ export default function OverviewTab({ onNavigate, course, courseId, lecturerId }
         {/* Course Outline */}
         <div className="overview-panel">
           <div className="outline-header">
-            <h3>Course Outline (Scheme of Work)</h3>
+            <h3>Course Outline</h3>
             {topics.length > 0 && (
               <span className="muted small">
                 {completedCount} of {topics.length} completed

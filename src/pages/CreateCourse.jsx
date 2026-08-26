@@ -10,7 +10,7 @@ export default function CreateCourse() {
 
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
-  const [sessionLabel, setSessionLabel] = useState("");
+  const [sessionLabel, setSessionLabel] = useState("2026/2027 First Semester");
   const [expectedCount, setExpectedCount] = useState("");
   const [attendancePolicy, setAttendancePolicy] = useState(75);
   const [error, setError] = useState("");

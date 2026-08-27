@@ -204,16 +204,16 @@ export default function StudentsTab({ courseId, lecturerId }) {
     <div className="students-tab">
       <div className="students-header">
         <input
-          className="search-input"
+          className="search-input width100"
           placeholder="Search students by name or matric number"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <div className="action-buttons">
-          <button onClick={() => setShowAddModal(true)} className="primary-btn">
+          <button onClick={() => setShowAddModal(true)} className="primary-btn width100">
             + Add Student
           </button>
-          <button onClick={() => setShowImportModal(true)} className="secondary-btn">
+          <button onClick={() => setShowImportModal(true)} className="secondary-btn width100">
             Import CSV
           </button>
         </div>

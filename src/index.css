@@ -503,6 +503,10 @@ input {
 
 }
 
+ .width100 {
+    width: 100% !important;
+  }
+
 @media (max-width: 900px) {
     .tab-content {
         padding: 20px 15px;

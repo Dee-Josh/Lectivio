@@ -13,6 +13,7 @@ import {
   increment,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import Spinner from "./Spinner";
 
 export default function StudentsTab({ courseId, lecturerId }) {
   const [students, setStudents] = useState([]);
@@ -197,7 +198,7 @@ export default function StudentsTab({ courseId, lecturerId }) {
       s.matricNumber.toLowerCase().includes(search.toLowerCase())
   );
 
-  if (loading) return <p>Loading students...</p>;
+  if (loading) return <Spinner />;
 
   return (
     <div className="students-tab">

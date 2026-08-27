@@ -2362,3 +2362,13 @@ p.center {
 .auth-back {
   font-size: 12px;
 }
+
+/* FOR AUTH IN APP.JSX - ADDED WHEN FIXING WHITE PAGE LOADING */
+
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f7fb;
+}

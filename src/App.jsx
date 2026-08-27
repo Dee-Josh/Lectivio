@@ -10,10 +10,24 @@ import OfflineBanner from "./components/OfflineBanner";
 import ForgotPassword from "./pages/ForgotPassword";
 import Landing from "./pages/Landing";
 import GradeScores from "./pages/GradeScores";
+import Spinner from "./components/Spinner";
+
+function LoadingScreen() {
+  return (
+    <div className="auth-loading-screen">
+      <Spinner />
+    </div>
+  );
+}
 
 function PrivateRoute({ children }) {
-  const { currentUser } = useAuth();
-  return currentUser ? children : <Navigate to="/login" />;
+  const { currentUser, loading } = useAuth();
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  return currentUser ? children : <Navigate to="/landing" replace />;
 }
 
 

@@ -451,6 +451,12 @@ input {
   }
 }
 
+@media (max-width: 390px) {
+  .course-view {
+    padding: 12px;
+  }
+}
+
 .back-link {
   color: #6b7280;
   font-size: 0.9rem;
@@ -504,9 +510,10 @@ input {
 }
 
 @media (max-width: 420px) {
-    .tab-content {
-      align-items: center;
-    }
+  .tab-content {
+    align-items: center;
+    padding: 12px;
+  }
 }
 
 /* === Students Tab === */
@@ -2066,6 +2073,12 @@ p.center {
   cursor: pointer;
 }
 
+@media (max-width: 420px) {
+  .overview-stat-card {
+    padding: 13px;
+  }
+}
+
 .overview-stat-card.soon {
   background: #f9fafb;
   opacity: 0.75;
@@ -2299,7 +2312,7 @@ p.center {
   justify-content: space-between;
   align-items: center;
   gap: 15px;
-  padding: 12px 8px;
+  padding: 12px 0;
   border-bottom: 1px solid #f3f4f6;
   text-decoration: none;
   color: inherit;
@@ -2324,13 +2337,14 @@ p.center {
   font-size: 0.85rem;
   font-weight: 600;
   color: #4f46e5;
+  text-align: right;
 }
 
 /* media query edit - OVERVIEW */
 
 @media (max-width: 600px) {
   .overview-panel {
-    padding: 13px;
+    padding: 12px;
   }
   .next-lecture-highlight {
     padding: 10px;

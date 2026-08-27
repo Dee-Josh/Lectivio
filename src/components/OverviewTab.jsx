@@ -14,6 +14,7 @@ import {
 import { db } from "../firebase";
 import Spinner from "./Spinner";
 import { getNextLectureDate, formatLectureDate, lectureDateKey, WEEKDAYS } from "../utils/schedule";
+import { Trash, Trash2 } from "lucide-react";
 
 export default function OverviewTab({ onNavigate, course, courseId, lecturerId }) {
   const [studentCount, setStudentCount] = useState(course.studentCount || 0);
@@ -303,7 +304,7 @@ export default function OverviewTab({ onNavigate, course, courseId, lecturerId }
                     className="link-btn danger small-link"
                     onClick={() => deleteTopic(topic.id)}
                   >
-                    ✕
+                    <Trash2 size={13} />
                   </button>
                 </div>
               ))}
@@ -317,7 +318,7 @@ export default function OverviewTab({ onNavigate, course, courseId, lecturerId }
               placeholder="Add a topic (e.g. Fluid Kinematics)"
             />
             <button type="submit" className="secondary-btn">
-              + Add
+              Add
             </button>
           </form>
         </div>

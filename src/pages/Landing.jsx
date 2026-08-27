@@ -39,7 +39,7 @@ export default function Landing() {
       {/* Nav */}
       <header className="landing-nav">
         <div className="landing-logo">
-          <span className="sidebar-logo-icon">📖</span> <span className="sidebar-logo-text">Lectivio</span>
+         {/*<span className="sidebar-logo-icon">📖</span> */} <span className="sidebar-logo-text">Lectivio</span>
         </div>
 
         <nav className={`landing-nav-links ${menuOpen ? "open" : ""}`}>
@@ -110,7 +110,7 @@ export default function Landing() {
           </div>
           <div className="landing-hero-trust">
             <span>✓ No credit card</span>
-            <span>✓ Free forever plan</span>
+            <span>✓ Free plan available</span>
             <span>✓ Setup in minutes</span>
           </div>
         </div>
@@ -270,24 +270,39 @@ export default function Landing() {
           </div>
           <div className="landing-step">
             <span className="landing-step-num">3</span>
+            <h4>Create Lecture Schedules</h4>
+            <p className="muted small">Set your weekly lecture schedules.</p>
+          </div>
+          <div className="landing-step">
+            <span className="landing-step-num">4</span>
+            <h4>Upload and Manage Materials</h4>
+            <p className="muted small">Upload and organize your course materials.</p>
+          </div>
+          <div className="landing-step">
+            <span className="landing-step-num">5</span>
             <h4>Add Students</h4>
             <p className="muted small">Import or add students easily.</p>
           </div>
           <div className="landing-step">
-            <span className="landing-step-num">4</span>
+            <span className="landing-step-num">6</span>
             <h4>Take Attendance</h4>
             <p className="muted small">Mark attendance quickly and accurately.</p>
           </div>
-          <div className="landing-step soon">
-            <span className="landing-step-num muted-num">5</span>
-            <h4>Grade & Assess <span className="coming-soon-badge inline">Soon</span></h4>
+          <div className="landing-step">
+            <span className="landing-step-num">7</span>
+            <h4>Grade & Assess</h4>
             <p className="muted small">Create assessments and grade with ease.</p>
           </div>
-          <div className="landing-step soon">
+          <div className="landing-step">
+            <span className="landing-step-num">8</span>
+            <h4>Export Results</h4>
+            <p className="muted small">Generate reports and share results instantly.</p>
+          </div>
+          {/* <div className="landing-step soon">
             <span className="landing-step-num muted-num">6</span>
             <h4>Export Results <span className="coming-soon-badge inline">Soon</span></h4>
             <p className="muted small">Generate reports and share results instantly.</p>
-          </div>
+          </div> */}
         </div>
       </section>
 

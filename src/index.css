@@ -2313,6 +2313,17 @@ p.center {
   color: #4f46e5;
 }
 
+/* media query edit - OVERVIEW */
+
+@media (max-width: 600px) {
+  .overview-panel {
+    padding: 13px;
+  }
+  .next-lecture-highlight {
+    padding: 10px;
+  }
+}
+
 
 
 /* AUTH BACK FOR SIGN UP AND LOGIN */

@@ -697,7 +697,19 @@ input {
 
 .sidebar-logo-icon {
   font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  /* gap: ; */
 }
+
+.sidebar-logo-icon img {
+  width: 40px;
+}
+
+.logo-img {
+  width: 40px;
+}
+
 
 .sidebar-logo-text {
   font-size: 1.35rem;

@@ -39,7 +39,7 @@ export default function Landing() {
       {/* Nav */}
       <header className="landing-nav">
         <div className="landing-logo">
-         <span className="sidebar-logo-icon"><img src="/public/lectivio-logo.png" alt="" /></span> <span className="sidebar-logo-text">Lectivio</span>
+         <span className="sidebar-logo-icon"><img src="/lectivio-logo.png" alt="" /></span> <span className="sidebar-logo-text">Lectivio</span>
         </div>
 
         <nav className={`landing-nav-links ${menuOpen ? "open" : ""}`}>

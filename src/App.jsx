@@ -11,11 +11,13 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Landing from "./pages/Landing";
 import GradeScores from "./pages/GradeScores";
 import Spinner from "./components/Spinner";
+import logo from "/lectivio-logo.png"
 
 function LoadingScreen() {
   return (
     <div className="auth-loading-screen">
-      <Spinner />
+      <img src={logo} className="initial-loader-logo margin-18" />
+      <div className="spinner" />
     </div>
   );
 }

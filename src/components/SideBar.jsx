@@ -64,7 +64,7 @@ export default function Sidebar({ isOpen, onClose }) {
       {isOpen && <div className="sidebar-overlay" onClick={onClose} />}
       <aside className={`sidebar ${isOpen ? "sidebar-open" : ""}`}>
         <div className="sidebar-logo">
-          <span className="sidebar-logo-icon"><img src="/public/lectivio-logo.png" className="logo-img" alt="" /></span>
+          <span className="sidebar-logo-icon"><img src="/lectivio-logo.png" className="logo-img" alt="" /></span>
           <span className="sidebar-logo-text">Lectivio</span>
           <button className="sidebar-close" onClick={onClose} aria-label="Close menu">
             ✕

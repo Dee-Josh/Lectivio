@@ -13,7 +13,7 @@ export default function AppLayout({ children }) {
         <div className="sidebar-logo mobile-logo">
             <Link to="/dashboard" >
               <div>
-                <span className="sidebar-logo-icon"><img src="/public/lectivio-logo.png" alt="" /></span>
+                <span className="sidebar-logo-icon"><img src="/lectivio-logo.png" alt="" /></span>
                 <span className="sidebar-logo-text">Lectivio</span>
               </div>
             </Link>

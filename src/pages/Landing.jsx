@@ -317,7 +317,10 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="landing-footer">
-        <div className="landing-logo">📖 Lectivio</div>
+        {/* <div className="landing-logo">📖 Lectivio</div> */}
+        <div className="landing-logo" style={{flexDirection: 'column'}}>
+         <span className="sidebar-logo-icon"><img src="/lectivio-logo.png" alt="" /></span> <span className="sidebar-logo-text">Lectivio</span>
+        </div>
         <p className="muted small">
           The smart teaching assistant that helps lecturers teach better and
           manage smarter.

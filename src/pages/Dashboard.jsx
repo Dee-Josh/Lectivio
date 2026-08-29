@@ -5,7 +5,7 @@ import { signOut } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
 import AppLayout from "../components/AppLayout";
-import Spinner from "../components/Spinner";
+import SpinnerFull from "../components/SpinnerFull";
 import { getNextLectureDate, formatLectureDate } from "../utils/schedule";
 
 export default function Dashboard() {
@@ -40,7 +40,7 @@ export default function Dashboard() {
     return unsubscribe;
   }, [currentUser]);
 
-  if (loading) return <Spinner label="Loading..." />;
+  if (loading) return <SpinnerFull label="Loading..." />;
 
   const totalCourses = courses.length;
   // const totalStudents = courses.reduce(

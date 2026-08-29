@@ -710,6 +710,16 @@ input {
   width: 40px;
 }
 
+@media (max-width: 500px) {
+  .sidebar-logo-icon img {
+    width: 35px;
+  }
+
+  .logo-img {
+    width: 35px;
+  }
+}
+
 
 .sidebar-logo-text {
   font-size: 1.35rem;

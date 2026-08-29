@@ -6,7 +6,7 @@ import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
 import StudentsTab from "../components/StudentsTab";
 // import { updateDoc, deleteDoc } from "firebase/firestore";
-import Spinner from "../components/Spinner";
+import SpinnerFull from "../components/SpinnerFull";
 import MaterialsTab from "../components/MaterialsTab";
 import OverviewTab from "../components/OverviewTab";
 
@@ -77,7 +77,7 @@ export default function CourseView() {
     return unsubscribe;
   }, [currentUser, courseId]);
 
-  if (loading) return <Spinner label="Loading..." />;
+  if (loading) return <SpinnerFull label="Loading..." />;
   if (!course) return <p>Course not found.</p>; //design course not found div later
 
   return (

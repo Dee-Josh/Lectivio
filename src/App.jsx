@@ -10,7 +10,7 @@ import OfflineBanner from "./components/OfflineBanner";
 import ForgotPassword from "./pages/ForgotPassword";
 import Landing from "./pages/Landing";
 import GradeScores from "./pages/GradeScores";
-import Spinner from "./components/Spinner";
+import SpinnerFull from "./components/SpinnerFull";
 import logo from "/lectivio-logo.png"
 
 function LoadingScreen() {

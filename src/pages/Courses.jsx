@@ -4,7 +4,7 @@ import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
 import AppLayout from "../components/AppLayout";
-import Spinner from "../components/Spinner";
+import SpinnerFull from "../components/SpinnerFull";
 
 export default function Courses() {
   const { currentUser } = useAuth();
@@ -29,7 +29,7 @@ export default function Courses() {
     return unsubscribe;
   }, [currentUser]);
 
-  if (loading) return <Spinner label="Loading..." />;
+  if (loading) return <SpinnerFull label="Loading..." />;
 
   return (
     <AppLayout>

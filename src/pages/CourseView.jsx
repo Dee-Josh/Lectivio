@@ -9,6 +9,7 @@ import StudentsTab from "../components/StudentsTab";
 import SpinnerFull from "../components/SpinnerFull";
 import MaterialsTab from "../components/MaterialsTab";
 import OverviewTab from "../components/OverviewTab";
+import AttendanceTab from "../components/AttendanceTab";
 
 export default function CourseView() {
   const { courseId } = useParams();
@@ -145,7 +146,9 @@ export default function CourseView() {
         {activeTab === "students" && (
           <StudentsTab courseId={courseId} lecturerId={currentUser.uid} />
         )}
-        {activeTab === "attendance" && <p>Attendance coming soon (Phase 2).</p>}
+        {activeTab === "attendance" && (
+          <AttendanceTab course={course} courseId={courseId} lecturerId={currentUser.uid} />
+        )}
         {activeTab === "assessments" && <p>Assessments coming soon (Phase 3).</p>}
         {activeTab === "insights" && <p>Insights coming soon (Phase 4).</p>}
       </div>

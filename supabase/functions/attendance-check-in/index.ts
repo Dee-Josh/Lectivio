@@ -14,6 +14,7 @@ if (!getApps().length) {
   });
 }
 const db = getFirestore();
+db.settings({ preferRest: true });
 // If you see gRPC errors from the Edge runtime, try: db.settings({ preferRest: true });
 
 const MAX_ACCURACY_M = 50;

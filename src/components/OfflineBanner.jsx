@@ -22,7 +22,7 @@ export default function OfflineBanner() {
   if (isOnline) return null;
 
   function displayOfflineBanner() {
-    if (currentScreen() == '/' ||currentScreen() == '/landing' || currentScreen() == '/login'|| currentScreen() == '/signup') {
+    if (currentScreen() == '/' ||currentScreen() == '/landing' || currentScreen() == '/login'|| currentScreen() == '/signup' || currentScreen() == '/attendance') {
       console.log(currentScreen() == '/landing' || currentScreen() == '/login'|| currentScreen() == '/signup')
       return true;
     }

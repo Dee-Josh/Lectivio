@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Spinner from "./Spinner";
+import { normKey } from "../utils/attendance";
 
 export default function StudentsTab({ courseId, lecturerId }) {
   const [students, setStudents] = useState([]);
@@ -62,6 +63,7 @@ export default function StudentsTab({ courseId, lecturerId }) {
     setDoc(newDocRef, {
       name,
       matricNumber,
+      matricKey: normKey(matricNumber),
       addedAt: serverTimestamp(),
     }).catch((err) => console.error("Background sync failed (add student):", err));
 
@@ -122,6 +124,7 @@ export default function StudentsTab({ courseId, lecturerId }) {
       batch.set(newDocRef, {
         name: row.name,
         matricNumber: row.matricNumber,
+        matricKey: normKey(row.matricNumber),
         addedAt: serverTimestamp(),
       });
     });
@@ -160,6 +163,7 @@ export default function StudentsTab({ courseId, lecturerId }) {
     updateDoc(studentRef, {
       name: editName,
       matricNumber: editMatric,
+      matricKey: normKey(editMatric),
     }).catch((err) => {
       console.error("Background sync failed (edit student):", err);
     });

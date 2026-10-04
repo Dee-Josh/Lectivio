@@ -10,6 +10,7 @@ import OfflineBanner from "./components/OfflineBanner";
 import ForgotPassword from "./pages/ForgotPassword";
 import Landing from "./pages/Landing";
 import GradeScores from "./pages/GradeScores";
+import Attendance from "./pages/Attendance";
 import SpinnerFull from "./components/SpinnerFull";
 import logo from "/lectivio-logo.png"
 
@@ -46,6 +47,8 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+      {/* Public student check-in — no login, no sidebar */}
+      <Route path="/attendance" element={<Attendance />} />
       <Route
         path="/dashboard"
         element={

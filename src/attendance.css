@@ -1,0 +1,93 @@
+/* ===== Attendance (lecturer tab + public student page) ===== */
+
+/* Start session */
+.att-start { max-width: 560px; }
+.att-start label { display: block; margin: 16px 0 6px; font-weight: 600; font-size: 0.9rem; }
+.att-start input, .att-start select { width: 100%; box-sizing: border-box; }
+.att-location-box {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px; border: 1px solid #e5e7eb; border-radius: 10px;
+  background: #f9fafb; margin-bottom: 8px;
+}
+.att-location-text { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.att-form-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.att-note {
+  margin: 16px 0; padding: 10px 12px; border-radius: 10px;
+  background: #eff6ff; color: #1d4ed8; font-size: 0.85rem;
+}
+
+/* Live session */
+.att-live-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.att-live-header h3 { margin: 0 0 4px; }
+.att-pill { padding: 5px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; }
+.att-pill-live { background: #fee2e2; color: #dc2626; }
+.att-pill-paused { background: #fef9c3; color: #a16207; }
+.att-pill-expired { background: #f3f4f6; color: #6b7280; }
+
+.att-code-card {
+  margin: 20px 0; padding: 20px; text-align: center;
+  background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 14px;
+}
+.att-code-dim { opacity: 0.55; }
+.att-code-label { margin: 0; color: #047857; font-weight: 600; font-size: 0.9rem; }
+.att-code-row { display: flex; justify-content: center; align-items: center; gap: 12px; }
+.att-code { font-size: 3.2rem; font-weight: 800; letter-spacing: 0.35em; padding-left: 0.35em; color: #111827; }
+.att-code-hint { margin: 4px 0 0; font-size: 0.85rem; color: #4b5563; }
+.att-warn { margin: 10px 0 0; font-size: 0.85rem; font-weight: 600; color: #b45309; }
+
+.att-green { color: #16a34a; }
+.att-amber { color: #d97706; }
+.att-red { color: #dc2626; }
+
+.att-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+.att-table-wrap { overflow-x: auto; }
+.att-row-select { padding: 4px 6px; font-size: 0.8rem; }
+
+.att-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; text-transform: capitalize; }
+.att-badge-present { background: #dcfce7; color: #16a34a; }
+.att-badge-late { background: #fef3c7; color: #b45309; }
+.att-badge-absent { background: #fee2e2; color: #dc2626; }
+
+.att-history { margin-top: 32px; }
+
+/* Public student page */
+.att-public {
+  min-height: 100vh; display: flex; align-items: flex-start; justify-content: center;
+  padding: 24px 16px; background: #f3f4f6; box-sizing: border-box;
+}
+.att-public-card {
+  width: 100%; max-width: 420px; background: white; border-radius: 16px;
+  padding: 28px 24px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06); box-sizing: border-box;
+}
+.att-public-logo { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 16px; }
+.att-public-logo img { width: 32px; height: 32px; }
+.att-public-logo span { font-size: 1.4rem; font-weight: 800; color: #1a1a2e; }
+.att-public-card h2 { text-align: center; margin: 8px 0; }
+.att-public-card > p.muted { text-align: center; }
+.att-public-card label { display: block; margin: 14px 0 6px; font-weight: 600; font-size: 0.9rem; }
+.att-public-card input { width: 100%; box-sizing: border-box; }
+.att-public-card .primary-btn { width: 100%; margin-top: 20px; }
+.att-public-note {
+  display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center;
+  margin-top: 16px; font-size: 0.8rem; color: #2563eb;
+}
+.att-public-footer { text-align: center; margin: 24px 0 0; font-size: 0.75rem; color: #9ca3af; }
+
+.att-result { text-align: center; padding-top: 8px; }
+.att-result-ok svg { color: #16a34a; }
+.att-result-fail svg { color: #dc2626; }
+.att-result-ok h2 { color: #16a34a; }
+.att-result-fail h2 { color: #dc2626; }
+.att-result-course { font-weight: 700; margin: 0; }
+.att-result-details {
+  margin: 20px 0 4px; padding: 12px 16px; border-radius: 12px;
+  background: #f9fafb; border: 1px solid #e5e7eb; text-align: left;
+}
+.att-result-details div { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; font-size: 0.9rem; }
+.att-result-details span { color: #6b7280; }
+
+@media (max-width: 600px) {
+  .att-form-row { grid-template-columns: 1fr; }
+  .att-code { font-size: 2.4rem; }
+  .att-location-box { flex-wrap: wrap; }
+}

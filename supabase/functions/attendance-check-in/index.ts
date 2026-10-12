@@ -17,7 +17,7 @@ const db = getFirestore();
 db.settings({ preferRest: true });
 // If you see gRPC errors from the Edge runtime, try: db.settings({ preferRest: true });
 
-const MAX_ACCURACY_M = 50;
+const MAX_ACCURACY_M = 500;
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -96,7 +96,7 @@ Deno.serve(async (req) => {
       .collection("students")
       .where("matricKey", "==", matricKey)
       .limit(1)
-      .get();
+      .get(); 
     if (studentQ.empty) return fail("NOT_ENROLLED");
     const student = studentQ.docs[0].data();
 

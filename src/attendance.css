@@ -91,3 +91,39 @@
   .att-code { font-size: 2.4rem; }
   .att-location-box { flex-wrap: wrap; }
 }
+
+/* History + detail + matrix */
+.att-history-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.att-history-head h4, .att-history-head h3 { margin: 0; }
+.att-row-click { cursor: pointer; }
+.att-row-click:hover, .att-row-click:focus { background: #f3f4f6; outline: none; }
+.att-link-btn { background: none; border: none; color: #2563eb; cursor: pointer; padding: 10px 0; font-size: 0.85rem; }
+
+.att-detail h3 { margin: 8px 0 4px; }
+.att-back-btn {
+  display: inline-flex; align-items: center; gap: 6px; background: none; border: none;
+  color: #2563eb; cursor: pointer; padding: 4px 0; font-size: 0.9rem;
+}
+.att-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 12px; }
+.att-chip {
+  padding: 6px 14px; border-radius: 999px; border: 1px solid #d1d5db;
+  background: white; cursor: pointer; font-size: 0.85rem;
+}
+.att-chip-active { background: #2563eb; border-color: #2563eb; color: white; }
+.att-detail-search { margin-bottom: 12px; max-width: 320px; }
+
+.att-matrix { border-collapse: collapse; font-size: 0.85rem; min-width: 100%; }
+.att-matrix th, .att-matrix td { padding: 8px 10px; border-bottom: 1px solid #e5e7eb; white-space: nowrap; text-align: center; }
+.att-matrix th:first-child, .att-matrix td:first-child { text-align: left; }
+.att-matrix th:nth-child(2), .att-matrix td:nth-child(2) { text-align: left; }
+.att-matrix th { background: #f9fafb; font-weight: 600; }
+.att-matrix th:first-child, .att-matrix td:first-child {
+  position: sticky; left: 0; background: white; z-index: 1; box-shadow: 1px 0 0 #e5e7eb;
+}
+.att-matrix th:first-child { background: #f9fafb; z-index: 2; }
+.att-matrix-col small, .att-matrix-total small { display: block; font-weight: 400; color: #6b7280; font-size: 0.7rem; }
+.att-cell { font-weight: 700; color: #9ca3af; }
+.att-cell-present { color: #16a34a; }
+.att-cell-late { color: #d97706; }
+.att-cell-absent { color: #dc2626; }
+.att-matrix-total { font-weight: 600; }

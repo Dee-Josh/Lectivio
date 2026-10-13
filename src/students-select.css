@@ -1,0 +1,12 @@
+/* Course Students tab: multi-select + bulk delete */
+.stu-select-bar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 10px 14px; margin-bottom: 10px;
+  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+  position: sticky; top: 0; z-index: 5;
+}
+.stu-select-count { font-weight: 700; color: #1d4ed8; }
+.stu-select-table th:first-child,
+.stu-select-table td:first-child { width: 36px; padding-right: 0; }
+.stu-select-table input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+.stu-select-table tr.row-selected td { background: #f0f7ff; }

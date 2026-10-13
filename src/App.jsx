@@ -13,6 +13,7 @@ import GradeScores from "./pages/GradeScores";
 import Attendance from "./pages/Attendance";
 import AttendanceManagement from "./pages/AttendanceManagement";
 import StudentsDirectory from "./pages/StudentsDirectory";
+import Settings from "./pages/Settings";
 import SpinnerFull from "./components/SpinnerFull";
 import logo from "/lectivio-logo.png"
 
@@ -90,6 +91,14 @@ function AppRoutes() {
         element={
           <PrivateRoute>
             <AttendanceManagement />
+          </PrivateRoute>
+        }
+      />
+        <Route
+        path="/settings"
+        element={
+          <PrivateRoute>
+            <Settings />
           </PrivateRoute>
         }
       />

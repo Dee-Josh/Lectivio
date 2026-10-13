@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useSearchParams } from "react-router-dom";
 // import { doc, onSnapshot } from "firebase/firestore";
 import { doc, onSnapshot, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -15,10 +15,16 @@ export default function CourseView() {
   const { courseId } = useParams();
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const requestedTab = searchParams.get("tab");
 
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState(() =>
+    ["overview", "materials", "students", "attendance", "assessments", "insights"].includes(requestedTab)
+      ? requestedTab
+      : "overview"
+  );
   const [showEditCourse, setShowEditCourse] = useState(false);
   const [editName, setEditName] = useState("");
   const [editCode, setEditCode] = useState("");

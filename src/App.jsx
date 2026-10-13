@@ -11,6 +11,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Landing from "./pages/Landing";
 import GradeScores from "./pages/GradeScores";
 import Attendance from "./pages/Attendance";
+import AttendanceManagement from "./pages/AttendanceManagement";
+import StudentsDirectory from "./pages/StudentsDirectory";
 import SpinnerFull from "./components/SpinnerFull";
 import logo from "/lectivio-logo.png"
 
@@ -73,6 +75,24 @@ function AppRoutes() {
           </PrivateRoute>
         }
       />
+      {/* Students view route from sidebar */}
+      <Route
+        path="/students"
+        element={
+          <PrivateRoute>
+            <StudentsDirectory />
+          </PrivateRoute>
+        }
+      />
+      {/* Attendance route from sidebar */}
+      <Route
+        path="/attendance-management" 
+        element={
+          <PrivateRoute>
+            <AttendanceManagement />
+          </PrivateRoute>
+        }
+      />
       <Route
         path="/courses/new"
         element={
@@ -105,9 +125,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
-
-
-
-
-

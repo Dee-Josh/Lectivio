@@ -12,6 +12,7 @@ import {
   updateDoc,
   writeBatch,
 } from "firebase/firestore";
+import { useSearchParams } from "react-router-dom";
 import { MapPin, Pause, Play, Copy, Check, ArrowLeft, ChevronRight, Download } from "lucide-react";
 import { db } from "../firebase";
 import Spinner from "./Spinner";
@@ -31,7 +32,13 @@ export default function AttendanceTab({ course, courseId, lecturerId }) {
   const [students, setStudents] = useState([]);
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState({ name: "home" }); // home | session | matrix
+  const [searchParams] = useSearchParams();
+  const [view, setView] = useState(() => {
+    // deep links from the Attendance overview page
+    if (searchParams.get("session")) return { name: "session", id: searchParams.get("session") };
+    if (searchParams.get("view") === "matrix") return { name: "matrix" };
+    return { name: "home" };
+  }); // home | session | matrix
 
   useEffect(() => {
     const unsubStudents = onSnapshot(studentsRef, (snap) => {
@@ -763,11 +770,12 @@ function CourseMatrix({ history, students, courseRef, course, onBack }) {
 
   function downloadCsv() {
     const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
-    const header = ["Name", "Matric Number", ...sessions.map((s) => s.lectureTitle), "Attended", "Held"];
+    const header = ["Name", "Matric Number", ...sessions.map((s) => s.lectureTitle), "Attended", "Held", "Attendance %"];
     const lines = [header.map(esc).join(",")];
     rows.forEach((r) => {
       const cells = r.cells.map((c) => (c ? c[0].toUpperCase() + c.slice(1) : ""));
-      lines.push([r.name, r.matricNumber, ...cells, r.attended, r.held].map(esc).join(","));
+      const attendancePercent = r.held > 0 ? `${Math.round((r.attended / r.held) * 100)}%` : "N/A";
+      lines.push([r.name, r.matricNumber, ...cells, r.attended, r.held, attendancePercent].map(esc).join(","));
     });
     const blob = new Blob(["\uFEFF" + lines.join("\n")], { type: "text/csv;charset=utf-8" });
     const url = URL.createObjectURL(blob);

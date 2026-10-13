@@ -1,0 +1,59 @@
+/* Attendance overview + Students directory (cross-course pages) */
+.mgmt-section { margin-top: 28px; }
+.mgmt-section h3 { margin: 0 0 12px; }
+.mgmt-columns { display: grid; grid-template-columns: 3fr 2fr; gap: 24px; align-items: start; }
+.mgmt-columns .mgmt-section { margin-top: 24px; }
+
+.mgmt-toolbar { display: flex; align-items: center; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
+.mgmt-toolbar label { font-weight: 600; font-size: 0.9rem; }
+.mgmt-select { padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 8px; background: white; max-width: 100%; }
+.mgmt-search { flex: 1; min-width: 220px; max-width: 420px; }
+
+.mgmt-live-banner {
+  display: flex; align-items: center; gap: 10px; margin: 16px 0 0; padding: 12px 16px;
+  background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px;
+  color: #065f46; text-decoration: none; font-size: 0.9rem;
+}
+.mgmt-live-dot { width: 10px; height: 10px; border-radius: 50%; background: #16a34a; animation: mgmt-pulse 1.6s infinite; flex-shrink: 0; }
+.mgmt-live-open { margin-left: auto; font-weight: 700; white-space: nowrap; }
+@keyframes mgmt-pulse { 0% { opacity: 1; } 50% { opacity: 0.35; } 100% { opacity: 1; } }
+
+.mgmt-risk-list { list-style: none; margin: 0; padding: 0; }
+.mgmt-risk-list li {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid #e5e7eb; font-size: 0.9rem;
+}
+.mgmt-risk-list li > div { display: flex; flex-direction: column; min-width: 0; }
+.mgmt-risk-list li span:last-child { font-weight: 600; white-space: nowrap; }
+
+/* Students directory */
+.stu-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.stu-row { border: 1px solid #e5e7eb; border-radius: 12px; background: white; overflow: hidden; }
+.stu-row-main {
+  display: flex; align-items: center; gap: 16px; width: 100%; padding: 12px 16px;
+  background: none; border: none; text-align: left; cursor: pointer; font: inherit;
+}
+.stu-row-main:hover { background: #f9fafb; }
+.stu-id { display: flex; flex-direction: column; min-width: 150px; flex: 0 0 auto; }
+.stu-chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+.stu-chip { padding: 3px 10px; border-radius: 999px; background: #f3f4f6; color: #4b5563; font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+.stu-chip-ok { background: #dcfce7; color: #15803d; }
+.stu-chip-low { background: #fee2e2; color: #dc2626; }
+.stu-caret { flex-shrink: 0; color: #6b7280; transition: transform 0.15s; }
+.stu-caret-open { transform: rotate(180deg); }
+
+.stu-detail { padding: 4px 16px 16px; border-top: 1px solid #f3f4f6; background: #fafafa; display: grid; gap: 14px; }
+.stu-course { padding-top: 12px; }
+.stu-course-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.stu-bar { height: 8px; border-radius: 999px; background: #e5e7eb; margin: 8px 0 6px; overflow: hidden; }
+.stu-bar-fill { height: 100%; background: #16a34a; border-radius: 999px; }
+.stu-bar-low { background: #dc2626; }
+.stu-strip { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0; }
+.stu-strip .att-cell { width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; background: white; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 0.8rem; }
+
+@media (max-width: 800px) {
+  .mgmt-columns { grid-template-columns: 1fr; }
+  .stu-row-main { flex-wrap: wrap; gap: 8px; }
+  .stu-chips { order: 3; flex-basis: 100%; }
+  .stu-id { flex: 1; }
+}

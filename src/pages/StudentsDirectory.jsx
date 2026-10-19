@@ -102,10 +102,23 @@ export default function StudentsDirectory() {
       <div className="courses-title-row">
         <div>
           <h1>Students</h1>
-          <p className="muted">Everyone across your courses. Add or import students inside each course.</p>
+          {/* <p className="muted">Everyone across your courses. Add or import students inside each course.</p> */}
+          <p className="muted">Everyone across your courses.</p>
         </div>
-        <Link to="/courses" className="secondary-btn">View courses</Link>
+        <Link to="/courses" className="secondary-btn">Courses</Link>
       </div>
+
+      <CourseQuickLinks
+        title="Manage students by course"
+        courses={courses}
+        tab="students"
+        action="Manage students"
+        statLine={(c) => {
+          if (!data[c.id]?.students) return "Loading…";
+          const n = data[c.id].students.length;
+          return `${n} student${n === 1 ? "" : "s"}`;
+        }}
+      />
 
       {courses.length === 0 ? (
         <div className="empty-state">
@@ -224,18 +237,6 @@ export default function StudentsDirectory() {
               Show more ({filtered.length - visible} left)
             </button>
           )}
-
-          <CourseQuickLinks
-            title="Manage students by course"
-            courses={courses}
-            tab="students"
-            action="Manage students"
-            statLine={(c) => {
-              if (!data[c.id]?.students) return "Loading…";
-              const n = data[c.id].students.length;
-              return `${n} student${n === 1 ? "" : "s"}`;
-            }}
-          />
         </>
       )}
     </AppLayout>

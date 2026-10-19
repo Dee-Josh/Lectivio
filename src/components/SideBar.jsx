@@ -49,8 +49,8 @@ const navItems = [
   { label: "Students", path: "/students", icon: <Users2 /> },
   { label: "Attendance", path: "/attendance-management", icon: <CalendarCheck /> },
   // { label: "Assessments", path: "/assessments", icon: <ClipboardCheck />, disabled: true },
-  { label: "Analytics", path: "/analytics", icon: <ChartNoAxesCombined />, disabled: true },
-  { label: "Messages", path: "/messages", icon: <LucideMessageSquare />, disabled: true },
+  // { label: "Analytics", path: "/analytics", icon: <ChartNoAxesCombined />, disabled: true },
+  // { label: "Messages", path: "/messages", icon: <LucideMessageSquare />, disabled: true },
   { label: "Settings", path: "/settings", icon: <Settings /> },
 ];
 
